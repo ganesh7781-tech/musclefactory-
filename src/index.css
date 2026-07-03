@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
+@import "tailwindcss";
+
+:root {
+  --brand-bg: #0d0f12;      /* Deep slate/black background */
+  --brand-card: #16191e;    /* Dark grey card background */
+  --brand-accent: #ff3131;  /* Premium sport red accent color */
+  --brand-accentHover: #e62020; /* Hover state red */
+  --brand-muted: #8f9cae;   /* Secondary text color */
+  --brand-border: #2a2f37;  /* Thin dark border lines */
+
+  --shadow-accent-glow-val: 0 0 20px rgba(255, 49, 49, 0.25);
+  --shadow-accent-glow-strong-val: 0 0 35px rgba(255, 49, 49, 0.5);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #8f9cae;
+}
+
+/* Light Mode Variables Override */
+:root.light {
+  --brand-bg: #f8fafc;       /* Light gray background (slate-50) */
+  --brand-card: #ffffff;     /* White card background */
+  --brand-muted: #475569;    /* Slate-600 secondary text */
+  --brand-border: #cbd5e1;   /* Slate-300 border */
+
+  --shadow-accent-glow-val: 0 4px 15px rgba(255, 49, 49, 0.12);
+  --shadow-accent-glow-strong-val: 0 6px 25px rgba(255, 49, 49, 0.25);
+  
+  --text-primary: #0f172a;   /* Slate-900 main text */
+  --text-secondary: #475569; /* Slate-600 secondary text */
+}
+
+@theme {
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-card: var(--brand-card);
+  --color-brand-accent: var(--brand-accent);
+  --color-brand-accentHover: var(--brand-accentHover);
+  --color-brand-muted: var(--brand-muted);
+  --color-brand-border: var(--brand-border);
+
+  --font-sans: 'Outfit', 'Inter', sans-serif;
+
+  --shadow-accent-glow: var(--shadow-accent-glow-val);
+  --shadow-accent-glow-strong: var(--shadow-accent-glow-strong-val);
+  --shadow-glass: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+@layer base {
+  body {
+    @apply bg-brand-bg font-sans antialiased overflow-x-hidden transition-colors duration-300;
+    background-color: var(--brand-bg);
+    color: var(--text-primary);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--brand-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #1d2127;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-accent);
+}
+
+.light ::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+}
+
+/* Glassmorphism utility */
+.glass-nav {
+  background: rgba(13, 15, 18, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+.light .glass-nav {
+  background: rgba(248, 250, 252, 0.85);
+  border-bottom-color: #cbd5e1;
+}
+
+.glass-card {
+  background: rgba(22, 25, 30, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+.glass-card:hover {
+  border-color: rgba(255, 49, 49, 0.3);
+  box-shadow: 0 0 20px rgba(255, 49, 49, 0.1);
+}
+
+.light .glass-card:hover {
+  border-color: rgba(255, 49, 49, 0.4);
+  box-shadow: 0 10px 25px rgba(255, 49, 49, 0.08);
+}
+
+/* Custom Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 15px rgba(255, 49, 49, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 49, 49, 0.45);
+  }
+}
+
+.pulse-glow {
+  animation: pulseGlow 3s infinite;
+}
+
+/* Hide scrollbars */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 8s linear infinite;
+}
+
+/* ==========================================
+   LIGHT MODE SPECIFIC STYLING OVERRIDES
+   ========================================== */
+
+.light h1,
+.light h2,
+.light h3,
+.light h4,
+.light h5,
+.light h6,
+.light .text-white {
+  color: #0f172a !important;
+}
+
+/* Secondary text */
+.light .text-brand-muted {
+  color: #475569 !important;
+}
+
+/* Input Fields and Select Dropdowns styling in light mode */
+.light input,
+.light select,
+.light textarea {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+  color: #0f172a !important;
+}
+.light input:focus,
+.light select:focus,
+.light textarea:focus {
+  border-color: #ff3131 !important;
+  box-shadow: 0 0 0 2px rgba(255, 49, 49, 0.15);
+}
+.light select option {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+
+/* Preserve White Text contrast on Neon Red elements */
+.light .bg-brand-accent,
+.light .bg-brand-accent *,
+.light .bg-brand-accentHover,
+.light .bg-brand-accentHover *,
+.light .bg-\[\#ff3131\],
+.light .bg-\[\#ff3131\] *,
+.light .bg-\[\#e62020\],
+.light .bg-\[\#e62020\] *,
+.light button.bg-brand-accent,
+.light button.bg-brand-accentHover,
+.light a.bg-brand-accent,
+.light a.bg-brand-accent * {
+  color: #ffffff !important;
+}
+
+/* Ensure secondary buttons have clear dark labels */
+.light button.bg-brand-card,
+.light button.bg-brand-card * {
+  color: #475569 !important;
+  border-color: #cbd5e1 !important;
+}
+.light button.bg-brand-card:hover,
+.light button.bg-brand-card:hover * {
+  color: #0f172a !important;
+  background-color: #e2e8f0 !important;
+}
+
+/* WhatsApp Widget always stays green/white */
+.light a.bg-\[\#25D366\],
+.light a.bg-\[\#25D366\] * {
+  background-color: #25D366 !important;
+  color: #ffffff !important;
+}
+.light a.bg-\[\#25D366\]:hover {
+  background-color: #20ba5a !important;
+}
+
+/* Footer Specific Overrides */
+.light footer {
+  background-color: #f1f5f9 !important;
+  border-top-color: #cbd5e1 !important;
+}
+.light footer .bg-brand-accent\/5 {
+  background-color: rgba(255, 49, 49, 0.03) !important;
+}
+.light footer .bg-brand-card {
+  background-color: #ffffff !important;
+}
+.light footer .bg-brand-card:hover {
+  background-color: #e2e8f0 !important;
+}

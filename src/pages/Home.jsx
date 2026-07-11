@@ -157,11 +157,11 @@ function Home() {
   return (
     <div className="space-y-6 pb-10 select-none">
       
-      <section className="relative min-h-[85vh] flex items-center justify-center pt-20 overflow-hidden bg-slate-50 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:20px_20px]">
+      <section className="relative min-h-[65vh] flex items-center justify-center pt-20 overflow-hidden bg-brand-bg bg-[radial-gradient(rgba(255,255,255,0.06)_1px,transparent_1px)] [background-size:20px_20px]">
         {/* Background Image */}
-        <div className="absolute inset-0 bg-[url('/hero_image.jpg')] bg-cover bg-top opacity-40" />
+        <div className="absolute inset-0 bg-[url('/hero_image.jpg')] bg-cover bg-top opacity-35" />
         {/* Dark Tint Overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/60 to-brand-bg/25" />
+        <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-brand-bg/75 to-brand-bg/40" />
         
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-5 py-8">
           <h1 className="font-extrabold text-3xl md:text-5xl lg:text-6xl tracking-tighter leading-tight text-white max-w-4xl mx-auto">
@@ -190,26 +190,47 @@ function Home() {
         </div>
       </section>
 
-      {/* 2. Stats Marquee Ticker */}
-      <section className="relative z-20 w-full overflow-hidden border-y border-red-900/50 py-3" style={{ background: 'linear-gradient(135deg, #0a0c0f 0%, #1c0303 40%, #280505 60%, #0a0c0f 100%)' }}>
-        {/* Fade edges */}
-        <div className="absolute left-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #0a0c0f, transparent)' }} />
-        <div className="absolute right-0 top-0 bottom-0 w-20 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #0a0c0f, transparent)' }} />
+      {/* 2. Stats Marquee Ticker with light background and stacked labels */}
+      <div className="relative w-full">
+        {/* Corner glows just above marquee */}
+        <div className="absolute -top-12 left-0 w-48 h-24 pointer-events-none z-30 opacity-60"
+          style={{
+            background: 'radial-gradient(circle at left bottom, rgba(239, 68, 68, 0.4) 0%, transparent 70%)',
+            filter: 'blur(20px)'
+          }}
+        />
+        <div className="absolute -top-12 right-0 w-48 h-24 pointer-events-none z-30 opacity-60"
+          style={{
+            background: 'radial-gradient(circle at right bottom, rgba(239, 68, 68, 0.4) 0%, transparent 70%)',
+            filter: 'blur(20px)'
+          }}
+        />
 
-        <div className="flex animate-marquee whitespace-nowrap">
-          {[...stats, ...stats, ...stats, ...stats].map((stat, index) => {
-            const Icon = stat.icon;
-            return (
-              <span key={index} className="inline-flex items-center gap-2.5 px-8 shrink-0">
-                <Icon className="h-4 w-4 shrink-0" style={{ color: '#ef4444' }} />
-                <span style={{ color: '#ffffff', fontWeight: 900, fontSize: '14px', letterSpacing: '-0.02em' }}>{stat.value}</span>
-                <span style={{ color: 'rgba(255,255,255,0.65)', fontWeight: 600, fontSize: '12px' }}>{stat.label}</span>
-                <span style={{ color: 'rgba(185,28,28,0.5)', marginLeft: '20px', fontSize: '18px', fontWeight: 100 }}>|</span>
-              </span>
-            );
-          })}
-        </div>
-      </section>
+        <section className="relative z-20 w-full overflow-hidden border-y border-red-950/50 py-4 shadow-sm" style={{ background: 'linear-gradient(135deg, #0a0c0f 0%, #1c0303 50%, #0a0c0f 100%)' }}>
+          {/* Fade edges with dark gradient */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #0a0c0f, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #0a0c0f, transparent)' }} />
+
+          <div className="flex animate-marquee whitespace-nowrap items-center">
+            {[...stats, ...stats, ...stats, ...stats].map((stat, index) => {
+              const Icon = stat.icon;
+              return (
+                <div key={index} className="inline-flex items-center gap-3.5 px-10 shrink-0">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)' }}>
+                    <Icon className="h-5 w-5" style={{ color: '#ef4444' }} />
+                  </div>
+                  <div className="flex flex-col text-left leading-tight">
+                    <span className="font-extrabold text-xl md:text-2xl tracking-tight" style={{ color: '#ffffff' }}>{stat.value}</span>
+                    <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{stat.label}</span>
+                  </div>
+                  <span className="text-red-900/40 ml-8 text-xl font-light">|</span>
+                </div>
+              );
+            })}
+          </div>
+        </section>
+      </div>
+
 
       {/* 3. Philosophy Section */}
       <section className="bg-section-white py-16 px-4 sm:px-6 lg:px-8 scroll-mt-20">
@@ -284,14 +305,15 @@ function Home() {
               </h2>
             </div>
 
-          <div className="bg-black/25 backdrop-blur-md rounded-2xl border border-white/10 p-4 sm:p-6 lg:p-7 max-w-4xl mx-auto shadow-2xl">
-            {/* Headers row */}
-            <div className="grid grid-cols-4 gap-2 pb-3 border-b-2 border-white/20 items-center text-center text-[10px] sm:text-xs md:text-sm font-extrabold tracking-wider">
-              <div className="text-left text-white/70 uppercase">Features</div>
-              <div className="text-yellow-300 uppercase font-black">Muscle Factory</div>
-              <div className="text-white/80 uppercase">Branded Gyms</div>
-              <div className="text-white/80 uppercase">Local Gyms</div>
-            </div>
+          <div className="overflow-x-auto -mx-6 px-6 sm:mx-0 sm:px-0 scrollbar-thin">
+            <div className="bg-black/25 backdrop-blur-md rounded-2xl border border-white/10 p-4 sm:p-6 lg:p-7 min-w-[500px] sm:min-w-0 max-w-4xl mx-auto shadow-2xl">
+              {/* Headers row */}
+              <div className="grid grid-cols-4 gap-2 pb-3 border-b-2 border-white/20 items-center text-center text-[10px] sm:text-xs md:text-sm font-extrabold tracking-wider">
+                <div className="text-left text-white/70 uppercase">Features</div>
+                <div className="text-yellow-300 uppercase font-black">Muscle Factory</div>
+                <div className="text-white/80 uppercase">Branded Gyms</div>
+                <div className="text-white/80 uppercase">Local Gyms</div>
+              </div>
 
             {/* Comparison rows */}
             <div className="divide-y divide-white/10">
@@ -351,6 +373,7 @@ function Home() {
               ))}
             </div>
           </div>
+        </div>
 
           {/* Membership Plans Cards */}
           <div className="space-y-6 pt-4">

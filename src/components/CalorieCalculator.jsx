@@ -139,7 +139,7 @@ function CalorieCalculator({ defaultTab = 'calorie' }) {
           <div className={`text-base font-extrabold ${results.bmiColor}`}>{results.bmiStatus}</div>
           <p className="text-[11px] text-brand-muted mt-2">Body Mass Index (kg/m²)</p>
         </div>
-        <div className="grid grid-cols-4 gap-2 text-center text-[10px] font-bold">
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-[10px] font-bold">
           {[['< 18.5','Underweight','text-yellow-400'],['18.5–24.9','Normal','text-green-400'],['25–29.9','Overweight','text-orange-400'],['≥ 30','Obese','text-red-400']].map(([r,l,c]) => (
             <div key={l} className="bg-brand-card rounded-lg p-2 border border-brand-border">
               <div className={`font-extrabold ${c}`}>{r}</div>
@@ -228,13 +228,13 @@ function CalorieCalculator({ defaultTab = 'calorie' }) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 mb-6 bg-brand-card/50 rounded-xl p-1 border border-brand-border">
+      <div className="flex gap-1.5 mb-6 bg-brand-card/50 rounded-xl p-1 border border-brand-border overflow-x-auto sm:overflow-x-visible">
         {tabs.map(({ id, label, icon: Icon }) => (
           <button
             key={id}
             type="button"
             onClick={() => { setActiveTab(id); setResults(null); }}
-            className={`flex-1 flex items-center justify-center gap-1.5 py-2 rounded-lg text-xs font-bold transition-all duration-300 cursor-pointer ${activeTab === id ? 'bg-brand-accent text-white shadow-md' : 'text-brand-muted hover:text-white'}`}
+            className={`flex-1 flex items-center justify-center gap-1 py-2 px-1 rounded-lg text-[10px] sm:text-xs font-bold transition-all duration-300 cursor-pointer shrink-0 sm:shrink ${activeTab === id ? 'bg-brand-accent text-white shadow-md' : 'text-brand-muted hover:text-white'}`}
           >
             <Icon className="h-3.5 w-3.5" />
             <span>{label}</span>

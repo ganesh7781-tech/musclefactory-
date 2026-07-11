@@ -6,29 +6,29 @@ function TrainingCard({ title, icon: Icon, description, details, onBookTrial }) 
 
   return (
     <>
-      <div className="glass-card rounded-2xl overflow-hidden border border-brand-border hover:border-brand-accent/40 group flex flex-col h-full transition-all duration-300">
-        {/* Decorative Top Line */}
-        <div className="h-1 bg-gradient-to-r from-transparent via-brand-accent/30 to-brand-accent transition-all duration-300 group-hover:via-brand-accent group-hover:to-brand-accent" />
+      <div className="bg-white/80 backdrop-blur-md rounded-2xl overflow-hidden border border-slate-200/80 hover:border-brand-accent/30 group flex flex-col h-full transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1 relative">
+        {/* Decorative Top Line: A glowing red-to-gold gradient */}
+        <div className="h-1 w-full bg-gradient-to-r from-brand-accent/40 via-brand-accent to-yellow-500 transition-all duration-500" />
         
-        <div className="p-8 flex flex-col flex-grow">
-          {/* Icon Header */}
-          <div className="bg-brand-accent/5 p-4 rounded-xl border border-brand-border group-hover:border-brand-accent/20 w-fit mb-6 transition-all duration-300 group-hover:scale-110">
-            <Icon className="h-7 w-7 text-brand-accent" />
+        <div className="p-6 flex flex-col flex-grow text-left">
+          {/* Icon Header: Soft red badge */}
+          <div className="bg-brand-accent/10 p-3 rounded-xl border border-brand-accent/20 group-hover:border-brand-accent/40 w-fit mb-4 transition-all duration-300 group-hover:scale-110 shadow-sm text-brand-accent">
+            <Icon className="h-6 w-6 text-brand-accent" />
           </div>
           
-          <h3 className="font-extrabold text-xl tracking-tight text-white mb-3 group-hover:text-brand-accent transition-colors">
+          <h3 className="font-extrabold text-base sm:text-lg tracking-tight text-slate-800 mb-2 group-hover:text-[#b91c1c] transition-colors">
             {title}
           </h3>
           
-          <p className="text-brand-muted text-sm leading-relaxed mb-6 flex-grow font-medium">
+          <p className="text-slate-600 text-xs sm:text-sm leading-relaxed mb-5 flex-grow font-medium">
             {description}
           </p>
 
           <button
             onClick={() => setShowModal(true)}
-            className="flex items-center space-x-2 text-xs font-extrabold tracking-widest text-brand-accent group-hover:text-white uppercase transition-colors"
+            className="flex items-center space-x-2 text-xs font-black text-brand-accent group-hover:text-[#be123c] transition-colors cursor-pointer w-fit"
           >
-            <span>LEARN MORE</span>
+            <span>Learn More</span>
             <ChevronRight className="h-4 w-4 transform transition-transform duration-300 group-hover:translate-x-1" />
           </button>
         </div>
@@ -60,7 +60,7 @@ function TrainingCard({ title, icon: Icon, description, details, onBookTrial }) 
               
               {/* Slogan & Philosophy */}
               <div>
-                <span className="text-xs text-brand-accent font-extrabold tracking-widest uppercase block mb-1">PROGRAM METRICS</span>
+                <span className="text-xs text-brand-accent font-semibold block mb-1">Program Metrics</span>
                 <p className="text-white text-base font-semibold leading-relaxed">
                   {details.philosophy}
                 </p>
@@ -71,7 +71,7 @@ function TrainingCard({ title, icon: Icon, description, details, onBookTrial }) 
                 
                 {/* Benefits */}
                 <div className="space-y-3">
-                  <span className="text-xs text-brand-accent font-extrabold tracking-widest uppercase flex items-center space-x-1.5">
+                  <span className="text-xs text-brand-accent font-semibold flex items-center space-x-1.5">
                     <Target className="h-3.5 w-3.5" />
                     <span>Key Target Outcomes</span>
                   </span>
@@ -89,7 +89,7 @@ function TrainingCard({ title, icon: Icon, description, details, onBookTrial }) 
                 <div className="space-y-4">
                   {/* Schedule */}
                   <div className="space-y-2">
-                    <span className="text-xs text-brand-accent font-extrabold tracking-widest uppercase flex items-center space-x-1.5">
+                    <span className="text-xs text-brand-accent font-semibold flex items-center space-x-1.5">
                       <Clock className="h-3.5 w-3.5" />
                       <span>Class Schedules</span>
                     </span>
@@ -100,7 +100,7 @@ function TrainingCard({ title, icon: Icon, description, details, onBookTrial }) 
 
                   {/* Gear/Equipment */}
                   <div className="space-y-2">
-                    <span className="text-xs text-brand-accent font-extrabold tracking-widest uppercase flex items-center space-x-1.5">
+                    <span className="text-xs text-brand-accent font-semibold flex items-center space-x-1.5">
                       <Compass className="h-3.5 w-3.5" />
                       <span>Gear &amp; Equipment Used</span>
                     </span>
@@ -115,13 +115,13 @@ function TrainingCard({ title, icon: Icon, description, details, onBookTrial }) 
             {/* Modal Footer */}
             <div className="p-6 md:p-8 border-t border-brand-border bg-black/40 flex flex-col sm:flex-row items-center justify-between gap-4">
               <div className="text-center sm:text-left">
-                <span className="text-[10px] text-brand-muted font-bold tracking-widest uppercase block">READY TO START?</span>
-                <span className="text-sm font-extrabold text-white">Claim your free guest pass today!</span>
+                <span className="text-[10px] text-brand-muted font-bold block">Ready to start?</span>
+                <span className="text-sm font-bold text-white">Claim your free guest pass today!</span>
               </div>
               <div className="flex space-x-3 w-full sm:w-auto">
                 <button
                   onClick={() => setShowModal(false)}
-                  className="flex-1 sm:flex-none border border-brand-border hover:border-brand-muted text-brand-muted hover:text-white px-6 py-3 rounded-xl text-xs font-extrabold tracking-widest transition-all"
+                  className="flex-1 sm:flex-none border border-brand-border hover:border-brand-muted text-brand-muted hover:text-white px-6 py-2.5 rounded-lg text-xs font-bold transition-all cursor-pointer"
                 >
                   DISMISS
                 </button>
@@ -130,7 +130,7 @@ function TrainingCard({ title, icon: Icon, description, details, onBookTrial }) 
                     setShowModal(false);
                     onBookTrial(title);
                   }}
-                  className="flex-1 sm:flex-none bg-brand-accent text-brand-bg hover:bg-brand-accentHover px-6 py-3 rounded-xl text-xs font-black tracking-widest shadow-accent-glow transition-all"
+                  className="flex-1 sm:flex-none bg-brand-accent text-brand-bg hover:bg-brand-accentHover px-6 py-2.5 rounded-lg text-xs font-extrabold shadow-accent-glow transition-all cursor-pointer"
                 >
                   BOOK FREE SESSION
                 </button>

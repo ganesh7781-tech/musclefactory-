@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
 
 @import "tailwindcss";
 
@@ -39,7 +39,7 @@
   --color-brand-muted: var(--brand-muted);
   --color-brand-border: var(--brand-border);
 
-  --font-sans: 'Outfit', 'Inter', sans-serif;
+  --font-sans: 'Montserrat', 'Inter', sans-serif;
 
   --shadow-accent-glow: var(--shadow-accent-glow-val);
   --shadow-accent-glow-strong: var(--shadow-accent-glow-strong-val);
@@ -75,15 +75,15 @@
 
 /* Glassmorphism utility */
 .glass-nav {
-  background: rgba(13, 15, 18, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  background: rgba(13, 15, 18, 0.25) !important;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: background-color 0.3s, border-color 0.3s;
 }
 
 .light .glass-nav {
-  background: rgba(248, 250, 252, 0.85);
-  border-bottom-color: #cbd5e1;
+  background: rgba(255, 255, 255, 0.25) !important;
+  border-bottom-color: rgba(15, 23, 42, 0.06) !important;
 }
 
 .glass-card {
@@ -145,6 +145,20 @@
 
 .animate-fadeIn {
   animation: fadeIn 0.4s ease-out forwards;
+}
+
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 24s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
 }
 
 @keyframes spin-slow {
@@ -250,3 +264,104 @@
 .light footer .bg-brand-card:hover {
   background-color: #e2e8f0 !important;
 }
+
+/* Reviews Horizontal Marquee */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Alternating Section Backgrounds */
+.bg-section-alt {
+  background-color: rgba(22, 25, 30, 0.45);
+}
+.light .bg-section-alt {
+  background-color: #f1f5f9 !important;
+}
+
+/* Red & White Alternating Sections */
+.bg-section-white {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+}
+.bg-section-white h1:not(.fixed *),
+.bg-section-white h2:not(.fixed *),
+.bg-section-white h3:not(.fixed *),
+.bg-section-white h4:not(.fixed *),
+.bg-section-white h5:not(.fixed *),
+.bg-section-white h6:not(.fixed *),
+.bg-section-white .text-white:not(.fixed *) {
+  color: #0f172a !important;
+}
+.bg-section-white .text-brand-muted:not(.fixed *) {
+  color: #64748b !important;
+}
+.bg-section-white .glass-card:not(.fixed *) {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+.bg-section-white .border-brand-border:not(.fixed *) {
+  border-color: #cbd5e1 !important;
+}
+.bg-section-white .bg-brand-card:not(.fixed *),
+.bg-section-white .bg-brand-card\/30:not(.fixed *),
+.bg-section-white .bg-brand-card\/50:not(.fixed *) {
+  background-color: #f8fafc !important;
+  border-color: #cbd5e1 !important;
+}
+
+.bg-section-red {
+  background: linear-gradient(135deg, #b91c1c 0%, #ff3131 50%, #991b1b 100%) !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.bg-section-red h1,
+.bg-section-red h2,
+.bg-section-red h3,
+.bg-section-red h4,
+.bg-section-red h5,
+.bg-section-red h6,
+.bg-section-red .text-white {
+  color: #ffffff !important;
+}
+.bg-section-red .text-brand-muted {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+.bg-section-red .border-brand-border {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+.bg-section-red .bg-brand-accent\/10 {
+  background-color: rgba(255, 255, 255, 0.15) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+.bg-section-red .text-brand-accent {
+  color: #ffffff !important;
+}
+.bg-section-red .glass-card {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.1) !important;
+}
+.bg-section-red .bg-brand-card {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+}
+.bg-section-red .bg-brand-card\/50 {
+  background-color: rgba(0, 0, 0, 0.25) !important;
+}
+.bg-section-red .bg-brand-card\/30 {
+  background-color: rgba(0, 0, 0, 0.15) !important;
+}
+.bg-section-red .text-yellow-300 {
+  color: #fef08a !important; /* Soft gold */
+}
+
+

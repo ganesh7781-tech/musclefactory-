@@ -1,191 +1,329 @@
-import React, { useState } from 'react';
-import { Phone, Mail, MapPin, CheckCircle2, Clock, Send } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { Phone, Mail, MapPin, CheckCircle2, Clock, Send, Calendar } from 'lucide-react';
 
-function Contact() {
-  const [formData, setFormData] = useState({ name: '', email: '', phone: '', subject: 'general', message: '' });
+function Contact({ selectedPlan = 'General Inquiry', setSelectedPlan }) {
+  const [formData, setFormData] = useState({ 
+    name: '', 
+    email: '', 
+    phone: '', 
+    gender: '', 
+    city: 'Boisar', 
+    date: new Date().toISOString().split('T')[0],
+    plan: 'General Inquiry'
+  });
   const [submitted, setSubmitted] = useState(false);
+
+  useEffect(() => {
+    if (selectedPlan) {
+      setFormData(prev => ({ ...prev, plan: selectedPlan }));
+    }
+  }, [selectedPlan]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!formData.name || !formData.phone || !formData.email || !formData.message) return;
+    if (!formData.name || !formData.phone || !formData.email || !formData.gender || !formData.city || !formData.date) return;
     setSubmitted(true);
     setTimeout(() => {
-      setFormData({ name: '', email: '', phone: '', subject: 'general', message: '' });
+      setFormData({ 
+        name: '', 
+        email: '', 
+        phone: '', 
+        gender: '', 
+        city: 'Boisar', 
+        date: new Date().toISOString().split('T')[0],
+        plan: selectedPlan || 'General Inquiry'
+      });
       setSubmitted(false);
     }, 4000);
   };
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 select-none space-y-10">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-8 select-none space-y-8">
       
       {/* Page Header */}
-      <div className="text-center space-y-3 max-w-2xl mx-auto">
-        <span className="text-xs text-brand-accent font-extrabold tracking-widest uppercase bg-brand-accent/10 border border-brand-accent/20 px-3 py-1 rounded-full">
-          GET IN TOUCH
+      <div className="text-center space-y-3 max-w-2xl mx-auto px-4">
+        <span className="text-xs text-brand-accent font-semibold bg-brand-accent/10 border border-brand-accent/20 px-3 py-1 rounded-full inline-block">
+          Get In Touch
         </span>
-        <h1 className="font-extrabold text-3xl md:text-4xl tracking-tight text-white leading-tight">
-          CONNECT WITH THE <span className="text-brand-accent italic">FAMILY</span>
+        <h1 className="font-extrabold text-2xl sm:text-3xl md:text-4xl tracking-tight text-white leading-tight">
+          Connect with the <span className="text-brand-accent italic">Family</span>
         </h1>
-        <p className="text-brand-muted text-xs font-semibold leading-relaxed">
-          Have questions? Fill out the form or contact us directly. We will reply to you as soon as possible.
+        <p className="text-brand-muted text-xs font-semibold leading-relaxed max-w-xl mx-auto">
+          Have questions? Fill out the form below or reach out to us directly.
         </p>
       </div>
 
       {/* Main Grid: Info vs Form */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
         
         {/* Info Column */}
-        <div className="lg:col-span-5 space-y-4 flex flex-col justify-between">
-          <div className="bg-brand-card/30 border border-brand-border rounded-2xl p-6 space-y-4 flex-1">
-            <h3 className="font-extrabold text-lg text-white">Direct Contact</h3>
-            <p className="text-brand-muted text-xs font-semibold leading-relaxed">
-              Call or email us anytime. We are happy to help you start your fitness journey!
-            </p>
+        <div className="lg:col-span-5 space-y-4 flex flex-col">
 
-            <div className="space-y-3 pt-2">
-              <div className="flex items-center space-x-3 text-xs text-brand-muted">
-                <Phone className="h-4 w-4 text-brand-accent shrink-0" />
-                <a href="tel:+917057880958" className="text-white hover:text-brand-accent font-bold">
-                  +91 70578 80958
-                </a>
+          {/* Direct Contact Card */}
+          <div className="flex-1 rounded-2xl p-6 relative overflow-hidden"
+            style={{ background: '#ffffff', border: '1px solid #e5e7eb', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+            <div className="absolute -top-8 -right-8 w-32 h-32 rounded-full pointer-events-none" style={{ background: 'radial-gradient(circle, rgba(185,28,28,0.07) 0%, transparent 70%)' }} />
+
+            <div className="relative z-10 space-y-4">
+              <div>
+                <span className="text-[10px] font-bold tracking-widest uppercase" style={{ color: '#b91c1c' }}>Reach Out</span>
+                <h3 className="font-extrabold text-xl mt-0.5" style={{ color: '#111827' }}>Direct Contact</h3>
               </div>
 
-              <div className="flex items-center space-x-3 text-xs text-brand-muted">
-                <Mail className="h-4 w-4 text-brand-accent shrink-0" />
-                <a href="mailto:info@musclefactory.in" className="text-white hover:text-brand-accent font-bold break-all">
-                  info@musclefactory.in
+              <div className="space-y-3">
+                <a href="tel:+917057880936" className="flex items-center gap-3 group cursor-pointer">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all group-hover:scale-105"
+                    style={{ background: '#fef2f2', border: '1px solid #fecaca' }}>
+                    <Phone className="h-4 w-4" style={{ color: '#b91c1c' }} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-semibold" style={{ color: '#9ca3af' }}>Phone</div>
+                    <div className="text-sm font-extrabold" style={{ color: '#111827' }}>+91 70578 80936</div>
+                  </div>
                 </a>
-              </div>
 
-              <div className="flex items-start space-x-3 text-xs text-brand-muted">
-                <MapPin className="h-4 w-4 text-brand-accent shrink-0 mt-0.5" />
-                <span className="text-white font-semibold">
-                  1st Floor, Nest 9 Mall, Next to Organe Diagnostic, Behind Sai Complex Chitralaya, Boisar 401501
-                </span>
+                <a href="mailto:musclefactoryhub@gmail.com" className="flex items-center gap-3 group cursor-pointer">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 transition-all group-hover:scale-105"
+                    style={{ background: '#fef2f2', border: '1px solid #fecaca' }}>
+                    <Mail className="h-4 w-4" style={{ color: '#b91c1c' }} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-semibold" style={{ color: '#9ca3af' }}>Email</div>
+                    <div className="text-sm font-extrabold break-all" style={{ color: '#111827' }}>musclefactoryhub@gmail.com</div>
+                  </div>
+                </a>
+
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5"
+                    style={{ background: '#fef2f2', border: '1px solid #fecaca' }}>
+                    <MapPin className="h-4 w-4" style={{ color: '#b91c1c' }} />
+                  </div>
+                  <div>
+                    <div className="text-[10px] font-semibold" style={{ color: '#9ca3af' }}>Address</div>
+                    <div className="text-sm font-bold leading-snug" style={{ color: '#374151' }}>1st Floor, Nest 9 Mall,<br/>Boisar 401501</div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div className="bg-brand-card/30 border border-brand-border p-6 rounded-2xl space-y-3">
-            <div className="flex items-center space-x-2 text-brand-accent">
-              <Clock className="h-4 w-4" />
-              <span className="text-xs font-extrabold tracking-wider uppercase">Active Gym Hours</span>
-            </div>
-            <div className="grid grid-cols-2 gap-4 text-xs font-semibold text-brand-muted">
-              <div>
-                <span className="text-white block font-extrabold">MON - SAT</span>
-                <span>5:00 AM - 10:00 PM</span>
+          {/* Gym Hours Card */}
+          <div className="rounded-2xl p-5 relative overflow-hidden"
+            style={{ background: '#ffffff', border: '1px solid #e5e7eb', boxShadow: '0 4px 24px rgba(0,0,0,0.08)' }}>
+
+            <div className="flex items-center gap-2 mb-4">
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center" style={{ background: '#fef2f2', border: '1px solid #fecaca' }}>
+                <Clock className="h-4 w-4" style={{ color: '#b91c1c' }} />
               </div>
-              <div>
-                <span className="text-white block font-extrabold">SUNDAYS</span>
-                <span>8:00 AM - 1:00 PM</span>
+              <span className="text-xs font-extrabold tracking-wide uppercase" style={{ color: '#b91c1c' }}>Active Gym Hours</span>
+            </div>
+
+            <div className="grid grid-cols-2 gap-3">
+              <div className="rounded-xl p-3 text-center" style={{ background: '#f9fafb', border: '1px solid #e5e7eb' }}>
+                <div className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: '#6b7280' }}>Mon – Sat</div>
+                <div className="font-extrabold text-sm" style={{ color: '#111827' }}>5:00 AM</div>
+                <div className="text-[10px] font-bold my-1" style={{ color: '#d1d5db' }}>to</div>
+                <div className="font-extrabold text-sm" style={{ color: '#111827' }}>10:00 PM</div>
+              </div>
+              <div className="rounded-xl p-3 text-center" style={{ background: '#f9fafb', border: '1px solid #e5e7eb' }}>
+                <div className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: '#6b7280' }}>Sunday</div>
+                <div className="font-extrabold text-sm" style={{ color: '#111827' }}>8:00 AM</div>
+                <div className="text-[10px] font-bold my-1" style={{ color: '#d1d5db' }}>to</div>
+                <div className="font-extrabold text-sm" style={{ color: '#111827' }}>1:00 PM</div>
               </div>
             </div>
           </div>
+
         </div>
 
+
         {/* Contact Form Column */}
-        <div className="lg:col-span-7 bg-brand-card/30 border border-brand-border rounded-2xl p-6 flex flex-col justify-between">
-          <h3 className="font-extrabold text-lg text-white mb-4 text-center lg:text-left">Send A Message</h3>
+        <div className="lg:col-span-7 bg-gradient-to-br from-[#800b0b] via-[#b91c1c] to-[#500404] border border-white/10 rounded-2xl p-6 relative overflow-hidden shadow-2xl flex flex-col justify-between">
+          {/* Membership Gold Ribbon */}
+          <div className="absolute top-0 right-6 bg-gradient-to-b from-[#eab308] to-[#ca8a04] text-brand-bg font-extrabold text-[10px] sm:text-xs py-2 px-3 rounded-b-lg shadow-lg flex flex-col items-center leading-tight z-10 select-none uppercase">
+            <span className="tracking-widest">JOIN</span>
+            <span className="tracking-widest">NOW</span>
+          </div>
 
           {submitted ? (
-            <div className="bg-brand-accent/10 border border-brand-accent/20 rounded-xl p-8 text-center space-y-3 animate-fadeIn h-full flex flex-col justify-center items-center">
-              <CheckCircle2 className="h-10 w-10 text-brand-accent" />
-              <h3 className="font-extrabold text-lg text-white">Message Sent!</h3>
-              <p className="text-brand-muted text-xs font-semibold max-w-sm">
-                We received your message and will email you back shortly.
+            <div className="bg-black/30 backdrop-blur-md border border-white/10 rounded-xl p-8 text-center space-y-3 animate-fadeIn h-full flex flex-col justify-center items-center py-16">
+              <CheckCircle2 className="h-10 w-10 text-yellow-300" />
+              <h3 className="font-extrabold text-lg text-white">Registration Successful!</h3>
+              <p className="text-white/80 text-xs font-medium max-w-sm leading-relaxed text-center">
+                {formData.plan === 'General Inquiry' 
+                  ? 'Your request has been registered successfully. Show this confirmation screen at the Muscle Factory front desk or wait for our team to contact you.'
+                  : `Your request for the ${formData.plan} is registered. Show this confirmation screen at the Muscle Factory desk to complete activation.`}
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-[10px] font-extrabold tracking-wider uppercase text-brand-muted">Name</label>
-                  <input
-                    type="text"
-                    required
-                    placeholder="Jane Doe"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="w-full bg-brand-card border border-brand-border rounded-xl px-3 py-2.5 focus:outline-none focus:border-brand-accent text-white font-semibold text-xs"
-                  />
-                </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-extrabold tracking-wider uppercase text-brand-muted">Email</label>
-                  <input
-                    type="email"
-                    required
-                    placeholder="jane@example.com"
-                    value={formData.email}
-                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                    className="w-full bg-brand-card border border-brand-border rounded-xl px-3 py-2.5 focus:outline-none focus:border-brand-accent text-white font-semibold text-xs"
-                  />
-                </div>
+            <div className="space-y-5">
+              <div className="space-y-1.5 text-left pr-12">
+                {formData.plan === 'General Inquiry' ? (
+                  <>
+                    <h3 className="font-extrabold text-lg sm:text-xl md:text-2xl text-white leading-tight">
+                      Start Your Fitness Journey Today
+                    </h3>
+                    <p className="text-white/80 text-[10px] sm:text-xs font-semibold leading-relaxed">
+                      Select a plan or inquire to get started with Boisar's premium club.
+                    </p>
+                  </>
+                ) : (
+                  <>
+                    <h3 className="font-extrabold text-lg sm:text-xl md:text-2xl text-white leading-tight">
+                      Join Muscle Factory: Register For <span className="text-yellow-300">{formData.plan}</span>
+                    </h3>
+                    <p className="text-white/80 text-[10px] sm:text-xs font-semibold leading-relaxed">
+                      Complete your registration below. Show the success screen at the gym counter.
+                    </p>
+                  </>
+                )}
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-1">
-                  <label className="text-[10px] font-extrabold tracking-wider uppercase text-brand-muted">Phone</label>
-                  <input
-                    type="tel"
-                    required
-                    placeholder="9876543210"
-                    value={formData.phone}
-                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                    className="w-full bg-brand-card border border-brand-border rounded-xl px-3 py-2.5 focus:outline-none focus:border-brand-accent text-white font-semibold text-xs"
-                  />
+              <form onSubmit={handleSubmit} className="space-y-3.5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="space-y-1 text-left">
+                    <label className="text-[10px] font-semibold text-white/90 flex items-center">
+                      <span>Full Name</span>
+                      <span className="text-yellow-300 ml-1 font-bold">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      placeholder="Name"
+                      value={formData.name}
+                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-yellow-300 text-white font-semibold text-xs transition-all placeholder-white/40"
+                    />
+                  </div>
+                  <div className="space-y-1 text-left">
+                    <label className="text-[10px] font-semibold text-white/90 flex items-center">
+                      <span>Email</span>
+                      <span className="text-yellow-300 ml-1 font-bold">*</span>
+                    </label>
+                    <input
+                      type="email"
+                      required
+                      placeholder="xyz@gmail.com"
+                      value={formData.email}
+                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                      className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-yellow-300 text-white font-semibold text-xs transition-all placeholder-white/40"
+                    />
+                  </div>
                 </div>
-                <div className="space-y-1">
-                  <label className="text-[10px] font-extrabold tracking-wider uppercase text-brand-muted">Subject</label>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="space-y-1 text-left">
+                    <label className="text-[10px] font-semibold text-white/90 flex items-center">
+                      <span>Phone Number</span>
+                      <span className="text-yellow-300 ml-1 font-bold">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      required
+                      placeholder="Mobile Number"
+                      value={formData.phone}
+                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                      className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-yellow-300 text-white font-semibold text-xs transition-all placeholder-white/40"
+                    />
+                  </div>
+                  <div className="space-y-1 text-left">
+                    <label className="text-[10px] font-semibold text-white/90 flex items-center">
+                      <span>Select Gender</span>
+                      <span className="text-yellow-300 ml-1 font-bold">*</span>
+                    </label>
+                    <select
+                      required
+                      value={formData.gender}
+                      onChange={(e) => setFormData({ ...formData, gender: e.target.value })}
+                      className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-yellow-300 text-white font-semibold text-xs cursor-pointer transition-all appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M7%209l3%203%203-3%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-[position:right_12px_center] bg-[size:16px_16px] bg-no-repeat pr-8"
+                    >
+                      <option value="" disabled className="text-black bg-white">Select Gender</option>
+                      <option value="male" className="text-black bg-white">Male</option>
+                      <option value="female" className="text-black bg-white">Female</option>
+                      <option value="other" className="text-black bg-white">Other</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div className="space-y-1 text-left">
+                  <label className="text-[10px] font-semibold text-white/90 flex items-center">
+                    <span>Selected Plan</span>
+                    <span className="text-yellow-300 ml-1 font-bold">*</span>
+                  </label>
                   <select
-                    value={formData.subject}
-                    onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                    className="w-full bg-brand-card border border-brand-border rounded-xl px-3 py-2.5 focus:outline-none focus:border-brand-accent text-white font-semibold text-xs cursor-pointer"
+                    required
+                    value={formData.plan}
+                    onChange={(e) => {
+                      setFormData({ ...formData, plan: e.target.value });
+                      if (setSelectedPlan) setSelectedPlan(e.target.value);
+                    }}
+                    className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-yellow-300 text-white font-semibold text-xs cursor-pointer transition-all appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M7%209l3%203%203-3%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-[position:right_12px_center] bg-[size:16px_16px] bg-no-repeat pr-8"
                   >
-                    <option value="general">General Gym Query</option>
-                    <option value="membership">Membership Plans</option>
-                    <option value="pt">Personal Training</option>
+                    <option value="General Inquiry" className="text-black bg-white">General Inquiry / Custom Plan</option>
+                    <option value="1 Month Plan" className="text-black bg-white">1 Month Plan (₹1,200)</option>
+                    <option value="3 Months Plan" className="text-black bg-white">3 Months Plan (₹2,500)</option>
+                    <option value="6 Months Plan" className="text-black bg-white">6 Months Plan (₹3,500)</option>
+                    <option value="12 Months Plan" className="text-black bg-white">12 Months Plan (₹6,000)</option>
                   </select>
                 </div>
-              </div>
 
-              <div className="space-y-1">
-                <label className="text-[10px] font-extrabold tracking-wider uppercase text-brand-muted">Your Message</label>
-                <textarea
-                  required
-                  placeholder="Write your questions here..."
-                  rows="3"
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full bg-brand-card border border-brand-border rounded-xl px-3 py-2.5 focus:outline-none focus:border-brand-accent text-white font-semibold text-xs resize-none"
-                />
-              </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+                  <div className="space-y-1 text-left">
+                    <label className="text-[10px] font-semibold text-white/90 flex items-center">
+                      <span>Select City</span>
+                      <span className="text-yellow-300 ml-1 font-bold">*</span>
+                    </label>
+                    <select
+                      required
+                      value={formData.city}
+                      onChange={(e) => setFormData({ ...formData, city: e.target.value })}
+                      className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-yellow-300 text-white font-semibold text-xs cursor-pointer transition-all appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M7%209l3%203%203-3%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-[position:right_12px_center] bg-[size:16px_16px] bg-no-repeat pr-8"
+                    >
+                      <option value="Boisar" className="text-black bg-white">Boisar</option>
+                    </select>
+                  </div>
+                  <div className="space-y-1 text-left">
+                    <label className="text-[10px] font-semibold text-white/90 flex items-center">
+                      <span>Select Date</span>
+                      <span className="text-yellow-300 ml-1 font-bold">*</span>
+                    </label>
+                    <input
+                      type="date"
+                      required
+                      value={formData.date}
+                      onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                      className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-yellow-300 text-white font-semibold text-xs transition-all"
+                    />
+                  </div>
+                </div>
 
-              <button
-                type="submit"
-                className="w-full bg-brand-accent text-brand-bg hover:bg-brand-accentHover font-black tracking-widest py-3 rounded-xl text-xs transition-all shadow-accent-glow flex items-center justify-center space-x-2 cursor-pointer"
-              >
-                <Send className="h-3.5 w-3.5" />
-                <span>SEND MESSAGE</span>
-              </button>
-            </form>
+                <div className="flex justify-end pt-2">
+                  <button
+                    type="submit"
+                    className="bg-gradient-to-r from-[#eab308] to-[#ca8a04] hover:from-[#facc15] hover:to-[#eab308] text-brand-bg font-extrabold px-8 py-2.5 rounded-lg text-xs shadow-lg shadow-yellow-500/10 cursor-pointer transition-all duration-300"
+                  >
+                    Continue
+                  </button>
+                </div>
+              </form>
+            </div>
           )}
         </div>
       </div>
 
       {/* Map Segment */}
-      <section className="bg-brand-card/30 border border-brand-border rounded-3xl p-8 space-y-4">
+      <section className="bg-brand-card/30 border border-brand-border rounded-xl p-5 space-y-4">
         <div className="flex items-center justify-center space-x-2 text-brand-accent">
-          <MapPin className="h-5 w-5" />
-          <span className="text-xs font-extrabold tracking-wider uppercase">Gym Location Map</span>
+          <MapPin className="h-4.5 w-4.5" />
+          <span className="text-xs font-semibold">Gym Location Map</span>
         </div>
         <div className="text-center">
-          <h3 className="font-extrabold text-xl text-white">Find Us in Nest 9 Mall, Boisar</h3>
+          <h3 className="font-extrabold text-lg text-white">Find Us in Nest 9 Mall, Boisar</h3>
           <p className="text-brand-muted text-xs font-bold mt-1">
             Behind Sai Complex Chitralaya, Boisar 401501.
           </p>
         </div>
-        <div className="w-full h-[400px] bg-brand-card border border-brand-border rounded-2xl overflow-hidden relative shadow-lg">
+        <div className="w-full h-[300px] bg-brand-card border border-brand-border rounded-xl overflow-hidden relative shadow-lg">
           <iframe
             src="https://maps.google.com/maps?q=Nest%209%20Mall,%20Boisar&t=&z=16&ie=UTF8&iwloc=&output=embed"
             className="w-full h-full border-0"
@@ -195,14 +333,14 @@ function Contact() {
             title="Google Maps Location"
           />
         </div>
-        <div className="text-center pt-2">
+        <div className="text-center pt-1">
           <a 
             href="https://maps.app.goo.gl/SJvDG3ABxempaoFx5" 
             target="_blank" 
             rel="noopener noreferrer"
-            className="inline-flex bg-brand-accent text-brand-bg hover:bg-brand-accentHover font-black tracking-widest px-6 py-2.5 rounded-xl text-xs transition-all shadow-accent-glow"
+            className="inline-flex bg-brand-accent text-brand-bg hover:bg-brand-accentHover font-extrabold px-5 py-2 rounded-lg text-xs transition-all shadow-accent-glow cursor-pointer"
           >
-            OPEN IN GOOGLE MAPS
+            Open in Google Maps
           </a>
         </div>
       </section>

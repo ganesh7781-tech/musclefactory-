@@ -7,10 +7,16 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "node server.js"
   },
   "dependencies": {
+    "@number-flow/react": "^0.6.1",
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
     "lucide-react": "^1.21.0",
+    "pg": "^8.22.0",
     "react": "^19.2.7",
     "react-dom": "^19.2.7"
   },

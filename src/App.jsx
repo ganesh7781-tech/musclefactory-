@@ -31,11 +31,11 @@ function App() {
   }, []);
 
   return (
-    <div className="flex flex-col min-h-screen bg-brand-bg text-white selection:bg-brand-accent selection:text-brand-bg">
+    <div className="flex flex-col min-h-screen bg-brand-bg selection:bg-brand-accent selection:text-brand-bg">
       {/* Premium Fullscreen Logo Preloader */}
       {loading && (
         <div 
-          className={`fixed inset-0 z-50 bg-[#0d0f12] flex flex-col items-center justify-center transition-opacity duration-500 ${
+          className={`fixed inset-0 z-50 bg-brand-bg flex flex-col items-center justify-center transition-opacity duration-500 ${
             fadeOut ? 'opacity-0 pointer-events-none' : 'opacity-100'
           }`}
         >
@@ -50,7 +50,7 @@ function App() {
             </div>
             
             {/* Spinning load track */}
-            <div className="w-8 h-8 rounded-full border-4 border-white/5 border-t-brand-accent animate-spin" />
+            <div className="w-8 h-8 rounded-full border-4 border-slate-200 border-t-brand-accent animate-spin" />
             
             <span className="text-[10px] text-brand-muted font-bold tracking-widest uppercase">
               Loading Muscle Factory

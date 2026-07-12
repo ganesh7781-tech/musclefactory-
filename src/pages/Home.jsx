@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Dumbbell, Users, Landmark, Award, ArrowRight, Quote, Star, Check, X } from 'lucide-react';
+import { Dumbbell, Users, Landmark, Award, ArrowRight, Quote, Star, Check, X, Calendar } from 'lucide-react';
 import Training from './Training';
 import Trainers from '../components/Trainers';
 import CalorieCalculator from '../components/CalorieCalculator';
@@ -8,9 +8,9 @@ import Contact from './Contact';
 
 function Home() {
   const stats = [
-    { value: '5,000+', label: 'Sq. Ft. Area', icon: Landmark },
-    { value: '15+', label: 'Expert Trainers', icon: Award },
-    { value: '2,500+', label: 'Transformations', icon: Users },
+    { value: '3,500', label: 'Sq. Ft. Area', icon: Landmark },
+    { value: 'Since 2021', label: 'Established', icon: Calendar },
+    { value: '500+', label: 'Transformations', icon: Users },
     { value: '5.0 ★', label: 'Google Rating', icon: Star }
   ];  const reviews = [
     {
@@ -64,7 +64,7 @@ function Home() {
   ];
 
   const comparisonData = [
-    { feature: 'Monthly Price', mf: '₹1,200', branded: '₹3,999', local: '₹1,999', isPrice: true },
+    { feature: 'Monthly Price', mf: '₹1,199', branded: '₹3,999', local: '₹1,999', isPrice: true },
     { feature: 'Premium Equipment', mf: true, branded: true, local: false },
     { feature: 'Personalized Plans', mf: true, branded: true, local: false },
     { feature: 'Techdriven Workouts', mf: true, branded: false, local: false },
@@ -74,10 +74,10 @@ function Home() {
   ];
 
   const membershipPlans = [
-    { name: '1 Month Plan', validity: '30 Days Validity', price: '₹1,200', active: true },
-    { name: '3 Months Plan', validity: '90 Days Validity', price: '₹2,500', active: true, popular: true },
-    { name: '6 Months Plan', validity: '180 Days Validity', price: '₹3,500', active: true },
-    { name: '12 Months Plan', validity: '365 Days Validity', price: '₹6,000', active: true }
+    { name: '1 Month Plan', validity: '30 Days Validity', price: '₹1,199', active: true },
+    { name: '3 Months Plan', validity: '90 Days Validity', price: '₹2,999', active: true, popular: true },
+    { name: '6 Months Plan', validity: '180 Days Validity', price: '₹3,999', active: true },
+    { name: '12 Months Plan', validity: '365 Days Validity', price: '₹6,999', active: true }
   ];
 
   const reels = [
@@ -206,24 +206,24 @@ function Home() {
           }}
         />
 
-        <section className="relative z-20 w-full overflow-hidden border-y border-red-950/50 py-4 shadow-sm" style={{ background: 'linear-gradient(135deg, #0a0c0f 0%, #1c0303 50%, #0a0c0f 100%)' }}>
-          {/* Fade edges with dark gradient */}
-          <div className="absolute left-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #0a0c0f, transparent)' }} />
-          <div className="absolute right-0 top-0 bottom-0 w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #0a0c0f, transparent)' }} />
+        <section className="relative z-20 w-full overflow-hidden border-y border-brand-accent/20 py-4 shadow-sm" style={{ background: 'linear-gradient(135deg, #b91c1c 0%, #ff3131 50%, #991b1b 100%)' }}>
+          {/* Fade edges with red gradient */}
+          <div className="absolute left-0 top-0 bottom-0 w-12 sm:w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to right, #b91c1c, transparent)' }} />
+          <div className="absolute right-0 top-0 bottom-0 w-12 sm:w-24 z-10 pointer-events-none" style={{ background: 'linear-gradient(to left, #991b1b, transparent)' }} />
 
           <div className="flex animate-marquee whitespace-nowrap items-center">
             {[...stats, ...stats, ...stats, ...stats].map((stat, index) => {
               const Icon = stat.icon;
               return (
                 <div key={index} className="inline-flex items-center gap-3.5 px-10 shrink-0">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(239, 68, 68, 0.1)', border: '1px solid rgba(239, 68, 68, 0.25)' }}>
-                    <Icon className="h-5 w-5" style={{ color: '#ef4444' }} />
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0" style={{ background: 'rgba(255, 255, 255, 0.15)', border: '1px solid rgba(255, 255, 255, 0.3)' }}>
+                    <Icon className="h-5 w-5" style={{ color: '#ffffff' }} />
                   </div>
                   <div className="flex flex-col text-left leading-tight">
                     <span className="font-extrabold text-xl md:text-2xl tracking-tight" style={{ color: '#ffffff' }}>{stat.value}</span>
-                    <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>{stat.label}</span>
+                    <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider" style={{ color: 'rgba(255, 255, 255, 0.8)' }}>{stat.label}</span>
                   </div>
-                  <span className="text-red-900/40 ml-8 text-xl font-light">|</span>
+                  <span className="text-white/30 ml-8 text-xl font-light">|</span>
                 </div>
               );
             })}
@@ -234,7 +234,7 @@ function Home() {
 
       {/* 3. Philosophy Section */}
       <section className="bg-section-white py-16 px-4 sm:px-6 lg:px-8 scroll-mt-20">
-        <div className="max-w-5xl mx-auto bg-gradient-to-br from-[#b91c1c] via-[#ff3131] to-[#991b1b] rounded-3xl p-8 sm:p-10 lg:p-12 shadow-2xl relative overflow-hidden text-white">
+        <div className="bg-section-red max-w-5xl mx-auto bg-gradient-to-br from-[#b91c1c] via-[#ff3131] to-[#991b1b] rounded-3xl p-8 sm:p-10 lg:p-12 shadow-2xl relative overflow-hidden text-white">
           {/* Decorative background grid/lines */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
           
@@ -293,7 +293,7 @@ function Home() {
 
       {/* Why Choose Us / Membership Comparison Section */}
       <section id="pricing" className="scroll-mt-20 bg-section-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto bg-gradient-to-br from-[#b91c1c] via-brand-accent to-[#991b1b] text-white py-12 px-6 sm:px-10 rounded-3xl relative overflow-hidden shadow-2xl">
+        <div className="bg-section-red max-w-5xl mx-auto bg-gradient-to-br from-[#b91c1c] via-brand-accent to-[#991b1b] text-white py-12 px-6 sm:px-10 rounded-3xl relative overflow-hidden shadow-2xl">
           {/* Decorative background grid/lines */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
           
@@ -452,7 +452,7 @@ function Home() {
 
       {/* 9. Fitness Tools Callout */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 bg-section-white">
-        <div className="bg-gradient-to-r from-[#b91c1c] to-[#991b1b] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden text-white">
+        <div className="bg-section-red bg-gradient-to-r from-[#b91c1c] to-[#991b1b] border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col lg:flex-row items-center justify-between gap-6 shadow-2xl relative overflow-hidden text-white">
           <div className="absolute right-0 top-0 w-96 h-96 bg-white/5 rounded-full filter blur-3xl pointer-events-none" />
           
           <div className="space-y-3 max-w-xl text-center lg:text-left">
@@ -480,7 +480,7 @@ function Home() {
       {/* 10. Integrated Fitness Tools (Calorie Calculator) Section */}
       {calculatorOpen && (
         <section id="calculator" className="scroll-mt-20 bg-section-white py-16 px-4 sm:px-6 lg:px-8 animate-fadeIn">
-          <div className="max-w-5xl mx-auto bg-gradient-to-br from-[#b91c1c] via-brand-accent to-[#991b1b] text-white py-12 px-5 sm:px-8 rounded-3xl relative overflow-hidden shadow-2xl">
+          <div className="bg-section-red max-w-5xl mx-auto bg-gradient-to-br from-[#b91c1c] via-brand-accent to-[#991b1b] text-white py-12 px-5 sm:px-8 rounded-3xl relative overflow-hidden shadow-2xl">
             {/* Decorative background grid/lines */}
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
             
@@ -524,7 +524,7 @@ function Home() {
 
       {/* Video Gallery Section (Reels) */}
       <section id="reels" className="scroll-mt-20 bg-section-white py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-5xl mx-auto bg-gradient-to-br from-[#b91c1c] via-brand-accent to-[#991b1b] text-white py-12 px-6 sm:px-10 rounded-3xl relative overflow-hidden shadow-2xl">
+        <div className="bg-section-red max-w-5xl mx-auto bg-gradient-to-br from-[#b91c1c] via-brand-accent to-[#991b1b] text-white py-12 px-6 sm:px-10 rounded-3xl relative overflow-hidden shadow-2xl">
           {/* Decorative background grid/lines */}
           <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:20px_20px] pointer-events-none" />
           
@@ -773,7 +773,7 @@ function Home() {
               setSelectedPlan('12 Months Plan');
               scrollToSection('contact');
             }}
-            className="bg-[#e11d48] hover:bg-[#be123c] text-white font-extrabold px-8 py-3 rounded-xl text-xs tracking-widest uppercase shadow-md shadow-rose-500/10 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer transition-all duration-300 shrink-0"
+            className="w-full md:w-auto text-center bg-[#e11d48] hover:bg-[#be123c] text-white font-extrabold px-8 py-3 rounded-xl text-xs tracking-widest uppercase shadow-md shadow-rose-500/10 hover:shadow-lg hover:-translate-y-0.5 active:translate-y-0 cursor-pointer transition-all duration-300 shrink-0"
           >
             JOIN NOW
           </button>

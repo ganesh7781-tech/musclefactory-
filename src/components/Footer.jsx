@@ -40,16 +40,16 @@ function Footer() {
             </p>
             <div className="flex space-x-3">
               <a href="#" className="bg-brand-card hover:bg-brand-accent hover:text-brand-bg p-2.5 rounded-lg transition-all duration-300">
-                <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+                <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg>
               </a>
-              <a 
-                href="https://www.instagram.com/musclefactoryhub/" 
-                target="_blank" 
-                rel="noopener noreferrer" 
+              <a
+                href="https://www.instagram.com/musclefactoryhub/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-brand-card hover:bg-brand-accent hover:text-brand-bg p-2.5 rounded-lg transition-all duration-300"
                 aria-label="Instagram Link"
               >
-                <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+                <svg className="h-4.5 w-4.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" y1="6.5" x2="17.51" y2="6.5" /></svg>
               </a>
             </div>
           </div>
@@ -141,8 +141,8 @@ function Footer() {
             <a href="#" className="hover:text-white transition-colors">Privacy &amp; Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
-          <button 
-            onClick={scrollToTop} 
+          <button
+            onClick={scrollToTop}
             className="bg-brand-bg hover:bg-brand-accent hover:text-brand-bg p-2.5 rounded-lg border border-brand-border hover:border-brand-accent transition-all duration-300"
             aria-label="Scroll to top"
           >

@@ -12,6 +12,8 @@ function Contact({ selectedPlan = 'General Inquiry', setSelectedPlan }) {
     plan: 'General Inquiry'
   });
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState(null);
 
   useEffect(() => {
     if (selectedPlan) {
@@ -19,22 +21,47 @@ function Contact({ selectedPlan = 'General Inquiry', setSelectedPlan }) {
     }
   }, [selectedPlan]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.phone || !formData.email || !formData.gender || !formData.city || !formData.date) return;
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({ 
-        name: '', 
-        email: '', 
-        phone: '', 
-        gender: '', 
-        city: 'Boisar', 
-        date: new Date().toISOString().split('T')[0],
-        plan: selectedPlan || 'General Inquiry'
+    
+    setSubmitting(true);
+    setSubmitError(null);
+
+    try {
+      const response = await fetch('/api/enquiries', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
-      setSubmitted(false);
-    }, 4000);
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        setSubmitted(true);
+        setFormData({ 
+          name: '', 
+          email: '', 
+          phone: '', 
+          gender: '', 
+          city: 'Boisar', 
+          date: new Date().toISOString().split('T')[0],
+          plan: selectedPlan || 'General Inquiry'
+        });
+        setTimeout(() => {
+          setSubmitted(false);
+        }, 5000);
+      } else {
+        setSubmitError(data.message || 'Submission failed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Error submitting form:', err);
+      setSubmitError('Connection error. Please check if the server is running.');
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -180,6 +207,11 @@ function Contact({ selectedPlan = 'General Inquiry', setSelectedPlan }) {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-3.5">
+                {submitError && (
+                  <div className="bg-red-500/20 border border-red-500/50 text-red-200 px-4 py-2.5 rounded-lg text-xs font-semibold text-center">
+                    {submitError}
+                  </div>
+                )}
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                   <div className="space-y-1 text-left">
                     <label className="text-[10px] font-semibold text-white/90 flex items-center">
@@ -260,10 +292,10 @@ function Contact({ selectedPlan = 'General Inquiry', setSelectedPlan }) {
                     className="w-full bg-black/20 border border-white/10 rounded-lg px-3 py-2.5 focus:outline-none focus:border-yellow-300 text-white font-semibold text-xs cursor-pointer transition-all appearance-none bg-[url('data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2020%2020%22%20fill%3D%22none%22%3E%3Cpath%20d%3D%22M7%209l3%203%203-3%22%20stroke%3D%22%23ffffff%22%20stroke-width%3D%221.5%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%2F%3E%3C%2Fsvg%3E')] bg-[position:right_12px_center] bg-[size:16px_16px] bg-no-repeat pr-8"
                   >
                     <option value="General Inquiry" className="text-black bg-white">General Inquiry / Custom Plan</option>
-                    <option value="1 Month Plan" className="text-black bg-white">1 Month Plan (₹1,200)</option>
-                    <option value="3 Months Plan" className="text-black bg-white">3 Months Plan (₹2,500)</option>
-                    <option value="6 Months Plan" className="text-black bg-white">6 Months Plan (₹3,500)</option>
-                    <option value="12 Months Plan" className="text-black bg-white">12 Months Plan (₹6,000)</option>
+                    <option value="1 Month Plan" className="text-black bg-white">1 Month Plan (₹1,199)</option>
+                    <option value="3 Months Plan" className="text-black bg-white">3 Months Plan (₹2,999)</option>
+                    <option value="6 Months Plan" className="text-black bg-white">6 Months Plan (₹3,999)</option>
+                    <option value="12 Months Plan" className="text-black bg-white">12 Months Plan (₹6,999)</option>
                   </select>
                 </div>
 
@@ -300,9 +332,10 @@ function Contact({ selectedPlan = 'General Inquiry', setSelectedPlan }) {
                 <div className="flex justify-end pt-2">
                   <button
                     type="submit"
-                    className="bg-gradient-to-r from-[#eab308] to-[#ca8a04] hover:from-[#facc15] hover:to-[#eab308] text-brand-bg font-extrabold px-8 py-2.5 rounded-lg text-xs shadow-lg shadow-yellow-500/10 cursor-pointer transition-all duration-300"
+                    disabled={submitting}
+                    className={`bg-gradient-to-r from-[#eab308] to-[#ca8a04] hover:from-[#facc15] hover:to-[#eab308] text-brand-bg font-extrabold px-8 py-2.5 rounded-lg text-xs shadow-lg shadow-yellow-500/10 cursor-pointer transition-all duration-300 ${submitting ? 'opacity-70 cursor-not-allowed' : ''}`}
                   >
-                    Continue
+                    {submitting ? 'Submitting...' : 'Continue'}
                   </button>
                 </div>
               </form>

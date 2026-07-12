@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Phone, Sun, Moon, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, ChevronDown } from 'lucide-react';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -7,9 +7,6 @@ function Navbar() {
   const [mobileExpanded, setMobileExpanded] = useState(null);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
   const [visible, setVisible] = useState(true);
-  const [theme, setTheme] = useState(() => {
-    return localStorage.getItem('theme') || 'light';
-  });
 
   const navLinks = [
     {
@@ -76,19 +73,7 @@ function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, [prevScrollPos]);
 
-  useEffect(() => {
-    if (theme === 'light') {
-      document.documentElement.classList.add('light');
-      localStorage.setItem('theme', 'light');
-    } else {
-      document.documentElement.classList.remove('light');
-      localStorage.setItem('theme', 'dark');
-    }
-  }, [theme]);
 
-  const toggleTheme = () => {
-    setTheme(prev => prev === 'dark' ? 'light' : 'dark');
-  };
 
   const handleNavClick = (id) => {
     setIsOpen(false);
@@ -130,20 +115,20 @@ function Navbar() {
               <img
                 src="/logo.jpg"
                 alt="Muscle Factory Logo"
-                className="h-9 w-9 rounded-lg object-cover border border-white/20 group-hover:border-brand-accent transition-all duration-300 shadow-md"
+                className="h-9 w-9 rounded-lg object-cover border border-slate-200 group-hover:border-brand-accent transition-all duration-300 shadow-md"
               />
               <div className="flex flex-col">
-                <span className="font-extrabold text-base tracking-tighter leading-none text-white font-sans drop-shadow-md">
+                <span className="font-extrabold text-base tracking-tighter leading-none text-slate-900 font-sans drop-shadow-sm">
                   MUSCLE<span className="text-brand-accent">FACTORY</span>
                 </span>
-                <span className="text-[7px] tracking-[0.18em] text-white/60 font-semibold uppercase leading-none mt-0.5 drop-shadow-sm">
+                <span className="text-[7px] tracking-[0.18em] text-slate-500 font-semibold uppercase leading-none mt-0.5 drop-shadow-sm">
                   Boisar's Fitness Club
                 </span>
               </div>
             </div>
 
             {/* Desktop Nav — floating center pill */}
-            <div className="hidden lg:flex pointer-events-auto items-center bg-black/30 backdrop-blur-md border border-white/10 rounded-full px-2 py-1.5 shadow-lg gap-1">
+            <div className="hidden lg:flex pointer-events-auto items-center bg-white/75 backdrop-blur-md border border-slate-200 rounded-full px-2 py-1.5 shadow-lg gap-1">
               {navLinks.map((link) => (
                 link.dropdown ? (
                   <div key={link.id} className="relative group">
@@ -151,7 +136,7 @@ function Navbar() {
                       onClick={() => handleNavClick(link.id)}
                       className={`flex items-center gap-1 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 cursor-pointer ${activeLink === link.id
                         ? 'bg-brand-accent text-white'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                        : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
                         }`}
                     >
                       <span>{link.label}</span>
@@ -159,9 +144,9 @@ function Navbar() {
                     </button>
 
                     {/* Dropdown */}
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-[#0d0f12]/95 backdrop-blur-xl border border-white/10 rounded-2xl shadow-2xl py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-3 w-56 bg-white/95 backdrop-blur-xl border border-slate-200 rounded-2xl shadow-2xl py-2 opacity-0 invisible translate-y-2 group-hover:opacity-100 group-hover:visible group-hover:translate-y-0 transition-all duration-300 z-50">
                       {/* Arrow */}
-                      <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-[#0d0f12] border-l border-t border-white/10 rotate-45" />
+                      <div className="absolute -top-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-l border-t border-slate-200 rotate-45" />
                       {link.dropdown.map((subItem, sIdx) => (
                         <button
                           key={sIdx}
@@ -172,7 +157,7 @@ function Navbar() {
                               handleNavClick(subItem.id);
                             }
                           }}
-                          className="w-full text-left px-4 py-2.5 text-xs font-semibold text-white/70 hover:text-white hover:bg-white/5 transition-colors cursor-pointer rounded-lg mx-auto"
+                          className="w-full text-left px-4 py-2.5 text-xs font-semibold text-slate-700 hover:text-brand-accent hover:bg-slate-50 transition-colors cursor-pointer rounded-lg mx-auto"
                         >
                           {subItem.label}
                         </button>
@@ -185,7 +170,7 @@ function Navbar() {
                     onClick={() => handleNavClick(link.id)}
                     className={`px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide transition-all duration-300 cursor-pointer ${activeLink === link.id
                       ? 'bg-brand-accent text-white'
-                      : 'text-white/80 hover:text-white hover:bg-white/10'
+                      : 'text-slate-700 hover:text-slate-900 hover:bg-slate-100'
                       }`}
                   >
                     {link.label}
@@ -198,7 +183,7 @@ function Navbar() {
             <div className="hidden lg:flex pointer-events-auto items-center gap-2">
               <a
                 href="tel:+917057880936"
-                className="p-2.5 bg-black/30 backdrop-blur-md border border-white/10 rounded-xl text-brand-accent hover:border-brand-accent/40 transition-all duration-300 flex items-center justify-center shadow-lg"
+                className="p-2.5 bg-white/75 backdrop-blur-md border border-slate-200 rounded-xl text-brand-accent hover:border-brand-accent/40 transition-all duration-300 flex items-center justify-center shadow-lg"
                 aria-label="Call Us"
               >
                 <Phone className="h-4 w-4 animate-pulse" />
@@ -213,12 +198,12 @@ function Navbar() {
 
             {/* Mobile: Phone + Hamburger */}
             <div className="lg:hidden pointer-events-auto flex items-center gap-2">
-              <a href="tel:+917057880936" className="bg-black/30 backdrop-blur-md border border-white/10 text-brand-accent p-2 rounded-xl shadow-md">
+              <a href="tel:+917057880936" className="bg-white/75 backdrop-blur-md border border-slate-200 text-brand-accent p-2 rounded-xl shadow-md">
                 <Phone className="h-5 w-5" />
               </a>
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="bg-black/30 backdrop-blur-md border border-white/10 inline-flex items-center justify-center p-2 rounded-xl text-white/80 hover:text-white shadow-md transition-colors"
+                className="bg-white/75 backdrop-blur-md border border-slate-200 inline-flex items-center justify-center p-2 rounded-xl text-slate-700 hover:text-slate-900 shadow-md transition-colors"
               >
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
@@ -234,9 +219,9 @@ function Navbar() {
         style={{
           position: 'fixed', top: 0, right: 0, bottom: 0,
           width: '100%', maxWidth: '320px',
-          background: '#0d0f12',
-          borderLeft: '1px solid rgba(255,255,255,0.08)',
-          boxShadow: '-8px 0 40px rgba(0,0,0,0.6)',
+          background: '#ffffff',
+          borderLeft: '1px solid rgba(0,0,0,0.08)',
+          boxShadow: '-8px 0 40px rgba(0,0,0,0.08)',
           zIndex: 9999,
           transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
           transition: 'transform 300ms ease-in-out',
@@ -244,29 +229,29 @@ function Navbar() {
         }}
       >
         {/* Header */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', height: '64px', borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#0d0f12' }}>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', padding: '0 20px', height: '64px', borderBottom: '1px solid rgba(0,0,0,0.08)', background: '#ffffff' }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <img src="/logo.jpg" alt="Muscle Factory Logo" style={{ height: '34px', width: '34px', borderRadius: '8px', objectFit: 'cover', border: '1px solid rgba(255,255,255,0.2)' }} />
-            <span style={{ fontWeight: 900, fontSize: '15px', letterSpacing: '-0.04em', color: '#fff' }}>
+            <img src="/logo.jpg" alt="Muscle Factory Logo" style={{ height: '34px', width: '34px', borderRadius: '8px', objectFit: 'cover', border: '1px solid rgba(0,0,0,0.1)' }} />
+            <span style={{ fontWeight: 900, fontSize: '15px', letterSpacing: '-0.04em', color: '#0f172a' }}>
               MUSCLE<span style={{ color: '#b91c1c' }}>FACTORY</span>
             </span>
           </div>
-          <button onClick={() => setIsOpen(false)} style={{ padding: '8px', borderRadius: '8px', background: 'rgba(255,255,255,0.06)', border: 'none', cursor: 'pointer', color: 'rgba(255,255,255,0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <button onClick={() => setIsOpen(false)} style={{ padding: '8px', borderRadius: '8px', background: 'rgba(0,0,0,0.04)', border: 'none', cursor: 'pointer', color: 'rgba(15, 23, 42, 0.7)', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <X size={20} />
           </button>
         </div>
 
         {/* Nav Items */}
-        <div style={{ flex: 1, overflowY: 'auto', padding: '16px 12px', background: '#0d0f12' }}>
+        <div style={{ flex: 1, overflowY: 'auto', padding: '16px 12px', background: '#ffffff' }}>
           {navLinks.map((link) => (
             link.dropdown ? (
               <div key={link.id} style={{ marginBottom: '2px' }}>
                 <button
                   onClick={() => setMobileExpanded(mobileExpanded === link.id ? null : link.id)}
-                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', textAlign: 'left', padding: '12px 16px', borderRadius: '12px', fontSize: '14px', fontWeight: 700, color: 'rgba(255,255,255,0.9)', background: mobileExpanded === link.id ? 'rgba(255,255,255,0.06)' : 'transparent', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }}
+                  style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', width: '100%', textAlign: 'left', padding: '12px 16px', borderRadius: '12px', fontSize: '14px', fontWeight: 700, color: 'rgba(15,23,42,0.9)', background: mobileExpanded === link.id ? 'rgba(0,0,0,0.04)' : 'transparent', border: 'none', cursor: 'pointer', transition: 'background 0.2s' }}
                 >
                   <span>{link.label}</span>
-                  <ChevronDown size={16} style={{ color: 'rgba(255,255,255,0.4)', transform: mobileExpanded === link.id ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s' }} />
+                  <ChevronDown size={16} style={{ color: 'rgba(15,23,42,0.4)', transform: mobileExpanded === link.id ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s' }} />
                 </button>
                 {mobileExpanded === link.id && (
                   <div style={{ paddingLeft: '12px', paddingBottom: '4px' }}>
@@ -286,7 +271,7 @@ function Navbar() {
                             handleNavClick(subItem.id);
                           }
                         }}
-                        style={{ display: 'flex', alignItems: 'center', width: '100%', textAlign: 'left', padding: '10px 16px', borderRadius: '8px', fontSize: '12px', fontWeight: 600, color: 'rgba(255,255,255,0.55)', background: 'transparent', border: 'none', cursor: 'pointer', gap: '8px' }}
+                        style={{ display: 'flex', alignItems: 'center', width: '100%', textAlign: 'left', padding: '10px 16px', borderRadius: '8px', fontSize: '12px', fontWeight: 600, color: 'rgba(15,23,42,0.65)', background: 'transparent', border: 'none', cursor: 'pointer', gap: '8px' }}
                       >
                         <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'rgba(185,28,28,0.5)', flexShrink: 0 }} />
                         {subItem.label}
@@ -299,7 +284,7 @@ function Navbar() {
               <button
                 key={link.id}
                 onClick={() => handleNavClick(link.id)}
-                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '12px 16px', borderRadius: '12px', fontSize: '14px', fontWeight: 700, color: activeLink === link.id ? '#fff' : 'rgba(255,255,255,0.85)', background: activeLink === link.id ? '#b91c1c' : 'transparent', border: 'none', cursor: 'pointer', marginBottom: '2px', transition: 'background 0.2s' }}
+                style={{ display: 'block', width: '100%', textAlign: 'left', padding: '12px 16px', borderRadius: '12px', fontSize: '14px', fontWeight: 700, color: activeLink === link.id ? '#fff' : 'rgba(15,23,42,0.85)', background: activeLink === link.id ? '#b91c1c' : 'transparent', border: 'none', cursor: 'pointer', marginBottom: '2px', transition: 'background 0.2s' }}
               >
                 {link.label}
               </button>
@@ -307,10 +292,10 @@ function Navbar() {
           ))}
 
           {/* Footer */}
-          <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid rgba(255,255,255,0.08)' }}>
-            <a href="tel:+917057880936" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'rgba(255,255,255,0.5)', textDecoration: 'none', padding: '10px', marginBottom: '10px' }}>
+          <div style={{ marginTop: '20px', paddingTop: '16px', borderTop: '1px solid rgba(0,0,0,0.08)' }}>
+            <a href="tel:+917057880936" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', color: 'rgba(15,23,42,0.5)', textDecoration: 'none', padding: '10px', marginBottom: '10px' }}>
               <Phone size={16} style={{ color: '#b91c1c' }} />
-              <span style={{ fontWeight: 600, fontSize: '14px', color: 'rgba(255,255,255,0.7)' }}>+91 70578 80936</span>
+              <span style={{ fontWeight: 600, fontSize: '14px', color: 'rgba(15,23,42,0.7)' }}>+91 70578 80936</span>
             </a>
             <button
               onClick={() => handleNavClick('contact')}
